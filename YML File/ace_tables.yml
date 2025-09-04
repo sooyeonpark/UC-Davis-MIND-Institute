@@ -1,0 +1,681 @@
+#key variables mostly id and visit
+
+defaults:
+ 
+  group_label: None
+
+  group_name: none
+ 
+  filter_variables: !!null
+
+  lazy: TRUE
+
+
+tables:
+
+  tbl_participants:
+    table_alias: Participants
+    key_variables:
+      subj_id: subj_id
+    table_categories:
+      UI: [sample_select, data_select]
+      Sort: ["Sample Info"]
+    filter_variables: [study_cohort, gender, app_diagnosis]
+    lazy: FALSE
+
+  tbl_visit:
+    table_alias: Visit
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [sample_select, data_select]
+      Sort: ["Sample Info"]
+    filter_variables: [visit]
+    lazy: FALSE
+
+  tbl_adi:
+    table_alias: ADI
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["ASD symptoms"]
+    filter_variables: [visit]
+
+  tbl_adis:
+    table_alias: ADIS
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Anxiety"]
+    filter.variables: [visit]
+
+  tbl_ados:
+    table_alias: ADOS
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["ASD symptoms"]
+    filter_variables: [ados_version, ados_module, visit]
+
+  tbl_autoimmune_extended_fam:
+    table_alias: "Autoimmune-Extended Family"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+
+  tbl_autoimmune_nuclear_fam:
+    table_alias: "Autoimmune-Nuclear Family"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+
+  tbl_autoimmune_summary:
+    table_alias: "Autoimmune Summary"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+
+  tbl_cbcl:
+    table_alias: CBCL
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit, cbcl_version]
+
+  tbl_cbcl_preschool_items:
+    table_alias: CBCL_Preschool_Items
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_cbcl_school_age_items:
+    table_alias: CBCL_School_Age_Items
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+    
+  tbl_cbq:
+    table_alias: CBQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_ccc:
+    table_alias: CCC
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_cdi_wg:
+    table_alias: "CDI WG"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variable: [visit]
+
+  tbl_cdi_ws:
+    table_alias: "CDI WS"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_celf4:
+    table_alias: 'CELF-4th Edition'
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_celf5:
+    table_alias: 'CELF-5th Edition'
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_cshq:
+    table_alias: CSHQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_das:
+    table_alias: DAS
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Cognitive"]
+    filter_variables: [das_version, visit]
+
+  tbl_demographics:
+    table_alias: Demographics
+    key_variables:
+      subj_id: id
+    table_categories:
+      UI: [data_select]
+      Sort: ["Descriptive"]
+    filter_variables:
+
+  tbl_diagnostic_consensus:
+    table_alias: "Diagnostic Consensus"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Descriptive"]
+    filter_variables: [visit, dxcf_clinimp]
+
+  tbl_dm_status:
+    table_alias: "DM Status"
+    key_variables:
+      subj_id: id
+    table_categories:
+      UI: [data_select]
+      Sort: ["MRI/EEG"]
+    filter_variables: [dm_status]
+
+  tbl_dna:
+    table_alias: DNA
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+
+  tbl_dsm:
+    table_alias: DSM
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["ASD Symptoms"]
+    filter_variables: [visit]
+
+  tbl_edi:
+    table_alias: "Emotion Dysregulation Inventory"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_edinburgh:
+    table_alias: "Edinburgh Handedness Index"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Other"]
+    filter_variables: [visit]
+
+  tbl_edq:
+    table_alias: EDQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_eowpvt:
+    table_alias: EOWPVT
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [eowpvt_version, visit]
+
+  tbl_fps:
+    table_alias: FPS
+    key_variables:
+      subj_id: id
+    table_categories:
+      UI: [data_select]
+      Sort: ["MRI/EEG"]
+    filter_variables: [visit]
+
+  tbl_fqs:
+    table_alias: FQS
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Social"]
+    filter_variables: [visit]
+
+  tbl_gi_categories:
+    table_alias: "GI Categories"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit, gi_severity, gi_diagnosis]
+
+  tbl_gi_history:
+    table_alias: "GI History"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+
+  tbl_gort:
+    table_alias: GORT
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_growth_measurement:
+    table_alias: "Growth Measurement"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+  
+  tbl_handedness:
+    table_alias: Handedness
+    key_variables:
+      subj_id: id
+    table_categories:
+      UI: [data_select]
+      Sort: ["Other"]
+    filter_variables:
+
+  tbl_harter:
+    table_alias: Harter
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_hpt:
+    table_alias: "Hand Preference Task"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Other"]
+    filter_variables: [visit]
+
+  tbl_masc:
+    table_alias: MASC
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Anxiety"]
+    filter_variables: [visit]
+
+  tbl_masc_parent:
+    table_alias: "MASC Parent"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Anxiety"]
+    filter_variables: [visit]
+
+  tbl_mori_regions:
+    table_alias: "Mori Regions"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["MRI/EEG"]
+    filter_variables: [visit]
+
+  tbl_mori_total:
+    table_alias: "Mori Total"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["MRI/EEG"]
+    filter_variables: [visit]
+  
+  tbl_msel:
+    table_alias: Mullen
+    key_variables:
+        subj_id: id
+        visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Cognitive"]
+    filter_variables: [visit]
+
+  tbl_nih_toolbox:
+    table_alias: "NIH Toolbox"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Cognitive"]
+    filter_variable: [visit]
+
+  tbl_pal:
+    table_alias: PAL
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_ppvt:
+    table_alias: PPVT
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [ppvt_version, visit]
+
+  tbl_rbs:
+    table_alias: RBS
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_sb5:
+    table_alias: 'Stanford Binet'
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Cognitive"]
+    filter_variables: [visit]
+
+  tbl_scan_details:
+    table_alias: "Scan Details"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["MRI/EEG"]
+    filter_variables: [visit, scan_status]
+
+  tbl_scared:
+    table_alias: SCARED
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Anxiety"]
+    filter_variables: [visit]
+
+  tbl_scared_parent:
+    table_alias: "SCARED Parent"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Anxiety"]
+    filter_variables: [visit]
+
+  tbl_scq:
+    table_alias: SCQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["ASD symptoms"]
+    filter_variables: [visit]
+
+  tbl_seq:
+    table_alias: SEQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Sensory"]
+    filter_variables: [visit]
+
+  tbl_srs:
+    table_alias: SRS
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Social"]
+    filter_variables: [srs_version, visit]
+
+  tbl_srs_dad:
+    table_alias: "SRS Father"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Social"]
+    filter_variables: [visit]
+
+  tbl_srs_mom:
+    table_alias: "SRS Mother"
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Social"]
+    filter_variables: [visit]
+
+  tbl_ssp:
+    table_alias: SSP
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Sensory"]
+    filter_variables: [visit]
+
+  tbl_ssp2:
+    table_alias: SSP2
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Sensory"]
+    filter_variables: [visit]
+
+  tbl_sti:
+    table_alias: STI
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Other"]
+    filter_variables: [visit]
+
+  tbl_summary_iq:
+    table_alias: Summary IQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Cognitive"]
+    filter_variables: [visit]
+
+  tbl_swan:
+    table_alias: SWAN
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_tanner_staging:
+    table_alias: Puberty
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Medical/Biological"]
+    filter_variables: [visit]
+
+  tbl_tcv:
+    table_alias: TCV
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["MRI/EEG"]
+    filter_variables: [visit]
+
+  tbl_tmcq:
+    table_alias: TMCQ
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_towre:
+    table_alias: TOWRE
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+  
+  tbl_vineland:
+    table_alias: Vineland
+    key_variables:
+       subj_id: id
+       visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]
+
+  tbl_wraml:
+    table_alias: WRAML
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Language"]
+    filter_variables: [visit]
+
+  tbl_ysr:
+    table_alias: YSR
+    key_variables:
+      subj_id: id
+      visit: visit
+    table_categories:
+      UI: [data_select]
+      Sort: ["Behavior/Temperament"]
+    filter_variables: [visit]

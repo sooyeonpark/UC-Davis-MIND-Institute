@@ -1,0 +1,13 @@
+source:
+  "UCD ACE Data":
+    connect:
+      MySQL:
+        dbname: 'ACE'
+        username:
+        password: 
+        host: localhost
+        port: 3306
+        bigint: integer
+    key_variables: [subj_id, visit]
+    table_categories: [UI, Sort]
+    data_dictionary: lkp_data_dictionary
