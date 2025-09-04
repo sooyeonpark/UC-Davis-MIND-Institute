@@ -1,0 +1,79 @@
+---
+title: "Report for BRAIN Study"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+## BRAIN study
+```{r, echo=FALSE}
+#getting the brain data
+suppressMessages(library(RODBC))
+suppressMessages(library(sqldf))
+source("S:/MIND/RESEARCH/APP Behavior Data/ACE data R processing/Functions/Merging_Study_Subjects.R")
+
+subj = merging_brain_staar_study_subjects()
+brain_subj = sqldf("select * from subj where study_cohort like 'BRAIN%'")
+brain_subj$query_date = Sys.Date()
+brain_subj$age = round(as.numeric((as.POSIXct(brain_subj$query_date) - as.POSIXct(brain_subj$dob))/365.25*12),2)
+brain_subj[] <- lapply(brain_subj, function(x) if(is.factor(x)) factor(x) else x)
+```
+This is an overview report of the BRAIN study.
+
+<Subject Information>
+
+Subject Status
+```{r,echo=F}
+table(brain_subj$subj_status)
+#plot(brain_subj$subj_status, main="Subject Status")
+```
+
+<Demographic information without dropped subjects>
+```{r, echo=F}
+brain_subj_nodrop = subset(brain_subj, subj_status!="Dropped")
+brain_subj_nodrop[] <- lapply(brain_subj_nodrop, function(x) if(is.factor(x)) factor(x) else x)
+```
+
+Age
+```{r,echo=F}
+#call tables or plots
+brain_subj_nodrop$age = as.numeric(brain_subj_nodrop$age)
+summary(brain_subj_nodrop$age)
+hist(brain_subj_nodrop$age, main="Participants' Current Ages")
+```
+
+Gender
+There are currently only male subjects in the population.
+```{r, echo=FALSE}
+summary(as.factor(brain_subj_nodrop$gender))
+```
+
+APP Diagnosis
+```{r,echo=F}
+plot(as.factor(brain_subj_nodrop$app_diagnosis),ylim=c(0,20),main="APP Diagnosis")
+```
+
+
+```{r,echo=F}
+# brain_dropped = subset(brain_subj,subj_status == 'Dropped')
+# summary(brain_dropped$age)
+# summary(as.factor(brain_dropped$gender))
+# merging demographic info?
+# brain_dropped = sqldf("select t1.*, t2.* from brain_dropped t1 left join demographics t2 on t1.subj_id = t2.id")
+# no demographic information for them
+brain_subj_nodrop = sqldf("select t1.*, t2.* from brain_subj_nodrop t1 left join demographics t2 on t1.subj_id = t2.id")
+summary(as.factor(brain_subj_nodrop$dem_ann_in))
+```
+
+Orphaned Data ID List
+```{r,echo=F}
+sqldf("select t1.subj_id from brain_subj t1 left join orphaned_data_list t2 on t1.subj_id=t2.id where measure_list != 'NA'")
+```
+
+Duplicate Data ID List
+```{r,echo=F}
+sqldf("select t1.subj_id from brain_subj t1 left join duplicate_data_list t2 on t1.subj_id=t2.id where measure_list != 'NA'")
+```
+

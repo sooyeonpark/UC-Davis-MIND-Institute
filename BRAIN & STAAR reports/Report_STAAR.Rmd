@@ -1,0 +1,49 @@
+---
+title: "Report for STAAR Study"
+output: 
+word_document: default
+pdf_document: default
+---
+
+## STAAR Study
+```{r,echo=FALSE}
+#getting STARR data
+library(RODBC)
+library(sqldf)
+con <- odbcConnectAccess2007("S:/MIND/RESEARCH/STAAR/Database docs/STAAR Subject Tracking.accdb")
+subj_star <- sqlQuery(channel = con,
+                 query = "SELECT t1.`SUBJ ID` AS subj_id, 'STAAR' AS study_cohort, t1.`SUBJ DOB` AS dob, t1.`SUBJ GENDER` AS gender,
+                 t1.`SUBJ STATUS` AS subj_status, 
+                 t1.`SUBJ APP DIAG` AS app_diagnosis, t1.`SUBJ LANGU` AS intake_lang, 
+                 t1.study_arm, t1.iq_score, t1.iq_measure, t1.date_consented, t1.pars_score, t1.treatment_day
+                 FROM `tblSubject_Contact` AS t1;")
+visits <- sqlQuery(channel = con,
+                 query = "SELECT t1.`SUBJ ID` AS subj_id,
+                 t2.encounter_date, t2.encounter_type
+                 FROM `tblSubject_Contact` AS t1
+                 LEFT JOIN dbo_AllSubjectEncounters AS t2
+                 ON t1.`SUBJ ID`=t2.mind_id;")
+
+# Join (merge) subj and rndmz data frames
+star = sqldf("select * from subj_star left join rndmz on subj_star.subj_id = rndmz.id")
+# Join (merge) subj and visits data frames (unless no visit data yet)
+star_combined = sqldf("select * from star left join visits on star.subj_id = visits.subj_id")
+# add new variable for query_date (i.e., current system date)
+star_combined$query_date = Sys.Date()
+star_combined$current_age = as.Date(star_combined$query_date) - as.Date(star_combined$dob)
+star_combined$current_age = star_combined$current_age/365.25*12
+star_combined$age_frm_rndmz = as.Date(star_combined$date_of_randomization) - as.Date(star_combined$dob)
+star_combined$age_frm_rndmz = star_combined$age_frm_rndmz/365.25*12
+star_combined[] <- lapply(star_combined, function(x) if(is.factor(x)) factor(x) else x)
+```
+This is an overview of STAAR Study.
+
+##Subject Information
+
+#Subject Status
+```{r,echo=FALSE}
+table(star_combined$subj_status)
+plot(star_combined$subj_status, main="Subject Status")
+```
+
+##Demographic Information without Dropped Subjects
