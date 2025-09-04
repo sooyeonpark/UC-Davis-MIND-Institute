@@ -1,5 +1,5 @@
 url = "https://redcap.ucdmc.ucdavis.edu/redcap/api/"
-token = "D290B40406AB0587C45B0C9E76E23322"
+token = "sensitive information"
 ace_con = redcapConnection(url,token)
 rm(url,token)
 arms = exportEvents(ace_con)
@@ -16,3 +16,4 @@ identify_same_data = function(rc_dt,access_dt){
   }
   return(access_dt)
 }
+
