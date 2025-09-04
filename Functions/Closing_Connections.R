@@ -1,0 +1,7 @@
+odbcClose(con4)
+odbcClose(con5)
+odbcClose(new_con)
+odbcClose(new_con2)
+odbcClose(mri_con)
+odbcClose(med_con)
+rm(con4,con5,new_con,new_con2,mri_con,med_con,con)
