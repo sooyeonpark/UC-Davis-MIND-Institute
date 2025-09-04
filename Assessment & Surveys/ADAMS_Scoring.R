@@ -42,4 +42,5 @@ adams_scored = adams[,c(1:2,grep("_age$",names(adams)):ncol(adams))]
 write.csv(adams_scored,"S:/MIND/RESEARCH/APP Behavior Data/ACE data R processing/archived_staar/adams_scored.csv",row.names=F)
 
 #cleaning up
+
 rm(adams_outliers,mhb_items,dm_itmes,sa_itmes,ga_itmes,cb_itmes)
